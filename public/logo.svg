@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 80" width="100%" height="100%">
+  <defs>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+  </defs>
+
+  <!-- TIPOGRAFIA PRINCIPAL -->
+  <text x="0" y="52" font-family="'Segoe UI', 'Calibri', sans-serif" font-weight="700" font-size="46" fill="#1F4E79" letter-spacing="-0.5">Samba</text>
+  <text x="145" y="52" font-family="'Segoe UI', 'Calibri', sans-serif" font-weight="400" font-size="46" fill="#2563EB" letter-spacing="-0.5">Core</text>
+
+  <!-- DESTAQUE "4" EM CAIXA AZUL -->
+  <g transform="translate(262, 8)">
+    <rect x="0" y="0" width="44" height="50" rx="8" fill="url(#accentGrad)" />
+    <text x="12" y="38" font-family="'Segoe UI', 'Calibri', sans-serif" font-weight="900" font-size="36" fill="#FFFFFF">4</text>
+  </g>
+
+  <!-- SUBTÍTULO DA MARCA -->
+  <text x="2" y="74" font-family="'Segoe UI', 'Calibri', sans-serif" font-weight="600" font-size="10.5" fill="#64748B" letter-spacing="2.8">ACTIVE DIRECTORY MANAGEMENT</text>
+</svg>

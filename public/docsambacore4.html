@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Manual do Usuário - SambaCore4</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Calibri:wght@400;700&family=Fira+Code:wght@400;600&display=swap');
+
+        @page {
+            size: A4;
+            margin: 20mm 15mm 20mm 15mm;
+            @bottom-center {
+                content: "Página " counter(page);
+                font-family: 'Calibri', sans-serif;
+                font-size: 9pt;
+                color: #666;
+            }
+        }
+
+        :root {
+            --primary: #1F4E79;       /* Azul Executivo */
+            --secondary: #2F5597;
+            --text: #262626;
+            --bg-light: #F2F4F7;
+            --border: #D9D9D9;
+            --code-bg: #1E293B;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Calibri', 'Segoe UI', sans-serif;
+            color: var(--text);
+            line-height: 1.5;
+            font-size: 10pt;
+            background: #fff;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        /* --- CONTAINER CENTRALIZADOR DO DOCUMENTO --- */
+        .document-container {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        /* --- CAPA CENTRALIZADA --- */
+        .cover {
+            height: 88vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* CABEÇALHO LADO A LADO: LOGO À ESQUERDA, DOCUMENTAÇÃO À DIREITA (CENTRALIZADO NO MEIO) */
+        .cover-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            width: 100%;
+            margin-bottom: 35px;
+        }
+
+        /* LOGO À ESQUERDA */
+        .cover-logo {
+            width: 310px;
+            height: auto;
+            display: block;
+        }
+
+        /* BADGE À DIREITA */
+        .cover-badge {
+            background: #EBF1F5;
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 9pt;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            border: 1px solid #D0DCE5;
+            white-space: nowrap;
+            display: inline-block;
+        }
+
+        .cover h1 {
+            font-size: 34pt;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.1;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cover h2 {
+            font-size: 15pt;
+            font-weight: 400;
+            color: #595959;
+            margin-bottom: 40px;
+            border: none;
+            padding: 0;
+        }
+
+        .cover-divider {
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+            margin: 0 auto 40px auto;
+        }
+
+        .cover-meta-box {
+            width: 100%;
+            background: var(--bg-light);
+            padding: 22px 28px;
+            border-radius: 6px;
+            border-left: 5px solid var(--primary);
+            text-align: left;
+            font-size: 9.5pt;
+        }
+
+        .cover-meta-item {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .cover-meta-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .cover-footer {
+            margin-top: 50px;
+            font-size: 8.5pt;
+            color: #7F7F7F;
+            text-align: center;
+        }
+
+        /* --- CONTEÚDO JUSTIFICADO --- */
+        h2 {
+            font-size: 14pt;
+            color: var(--primary);
+            border-bottom: 1.5pt solid var(--primary);
+            padding-bottom: 3px;
+            margin-top: 22px;
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        h3 {
+            font-size: 11.5pt;
+            color: var(--secondary);
+            margin-top: 14px;
+            margin-bottom: 6px;
+            text-align: left;
+        }
+
+        p {
+            margin-bottom: 10px;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        /* --- ESTILIZAÇÃO DA IMAGEM DO DASHBOARD --- */
+        .dashboard-preview {
+            text-align: center;
+            margin: 20px 0 25px 0;
+        }
+
+        .dashboard-preview img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #CBD5E1;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .dashboard-preview figcaption {
+            font-size: 8.5pt;
+            color: #64748B;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* --- BOXES E DESTAQUES --- */
+        .callout {
+            background: var(--bg-light);
+            border-left: 4px solid var(--primary);
+            padding: 12px 16px;
+            border-radius: 0 4px 4px 0;
+            margin: 14px 0;
+            font-size: 9.5pt;
+            text-align: justify;
+        }
+
+        .callout.warning {
+            border-left-color: #C55A11;
+            background: #FFF2CC;
+        }
+
+        .callout.danger {
+            border-left-color: #C00000;
+            background: #FCE4D6;
+        }
+
+        .callout.success {
+            border-left-color: #548235;
+            background: #E2EFDA;
+        }
+
+        /* --- CÓDIGOS E TERMINAL --- */
+        pre, code {
+            font-family: 'Fira Code', 'Consolas', monospace;
+        }
+
+        pre {
+            background: var(--code-bg);
+            color: #38BDF8;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 8.5pt;
+            overflow-x: auto;
+            margin: 10px 0;
+            line-height: 1.4;
+            text-align: left;
+        }
+
+        code {
+            background: #F2F2F2;
+            color: #C00000;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 9pt;
+        }
+
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        /* --- TABELAS --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 9pt;
+        }
+
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--primary);
+            color: #fff;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        td {
+            text-align: justify;
+        }
+
+        tr:nth-child(even) {
+            background: #F9F9F9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="document-container">
+
+        <!-- CAPA CENTRALIZADA -->
+        <div class="cover page-break">
+            
+            <!-- LINHA CENTRALIZADA: LOGO À ESQUERDA + DOCUMENTAÇÃO TÉCNICA À DIREITA -->
+            <div class="cover-header-row">
+                <img src="logo.svg" alt="SambaCore4 Logo" class="cover-logo">
+                <span class="cover-badge">Documentação Técnica Oficial</span>
+            </div>
+
+            <h1>SambaCore4</h1>
+            <h2>Manual de Utilização & Instruções Operacionais</h2>
+            
+            <div class="cover-divider"></div>
+
+            <div class="cover-meta-box">
+                <div class="cover-meta-item"><strong>Idealizador do Projeto:</strong> Ricardo P C (Analista de Governança de TI)</div>
+                <div class="cover-meta-item"><strong>Plataforma:</strong> Painel Web Samba AD DC</div>
+                <div class="cover-meta-item"><strong>Ambiente Padrão:</strong> SUAEMPRESA.LOCAL</div>
+                <div class="cover-meta-item"><strong>Servidor Alvo:</strong> Debian GNU/Linux</div>
+            </div>
+
+            <div class="cover-footer">
+                SambaCore4 Management Systems &bull; Governança de TI
+            </div>
+        </div>
+
+        <!-- VISUALIZAÇÃO DO DASHBOARD (ANTES DA SEÇÃO 1) -->
+        <figure class="dashboard-preview">
+            <img src="dashboard.png" alt="Interface Principal do SambaCore4 - Visão Geral do Domínio">
+            <figcaption>Figura 1: Painel principal do SambaCore4 exibindo telemetria de hardware, métricas do Active Directory e o módulo de Análise Preditiva por IA.</figcaption>
+        </figure>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+
+        <h2>1. Visão Geral e Credenciais de Acesso</h2>
+        <p>O <strong>SambaCore4</strong> é uma interface web intuitiva e moderna projetada para simplificar a administração centralizada de ambientes Active Directory gerenciados pelo <strong>Samba 4 (AD DC)</strong>. O sistema elimina a necessidade de executar comandos complexos no terminal para tarefas rotineiras, fornecendo dashboards visuais para monitoramento do servidor, inteligência preditiva de segurança e controle total de usuários, máquinas, unidades organizacionais (OUs) e diretivas de grupo (GPOs).</p>
+        
+        <div class="callout success">
+            <strong>🔑 Credenciais Padrão do Sistema Web:</strong><br>
+            &bull; <strong>Usuário Inicial:</strong> <code>admin_master</code><br>
+            &bull; <strong>Senha Inicial:</strong> <code>admin123</code>
+        </div>
+
+        <h2>2. Estrutura da Interface e Navegação</h2>
+        <p>A interface do painel web foi estruturada para proporcionar uma navegação rápida e fluida entre os seus principais módulos operacionais:</p>
+        <ul>
+            <li><strong>Visão Geral:</strong> Dashboard principal com dados globais do sistema, estatísticas de hardware e IA defensiva preditiva.</li>
+            <li><strong>Usuários AD:</strong> Módulo de administração completa de contas corporativas do domínio.</li>
+            <li><strong>Desktops / Computadores:</strong> Controle e inventário de estações de trabalho e servidores.</li>
+            <li><strong>Unidades Organizacionais:</strong> Gerenciamento da estrutura hierárquica do diretório LDAP (OUs).</li>
+            <li><strong>Diretivas GPO:</strong> Criação, edição e vínculo de objetos de Diretivas de Grupo.</li>
+            <li><strong>Operadores do Sistema:</strong> Gestão de acessos e permissões dos operadores ao painel web.</li>
+            <li><strong>Navegador de Objetos:</strong> Ferramenta de consulta avançada e detalhada de todos os objetos do diretório.</li>
+            <li><strong>Comandos samba-tool:</strong> Console de transparência, logs e execução de comandos CLI.</li>
+        </ul>
+
+        <h2>3. Métricas do Servidor e Hardware</h2>
+        <p>Através do painel <strong>Visão Geral</strong>, a equipe de infraestrutura pode monitorar continuamente a integridade do servidor Debian Linux:</p>
+        <div class="callout">
+            <ul>
+                <li><strong>Total de Usuários AD:</strong> Quantidade total de contas cadastradas e ativas no <code>samba-tool</code>.</li>
+                <li><strong>Desktops / Computadores:</strong> Total de máquinas clientes e servidores ingressados no domínio.</li>
+                <li><strong>Uso de CPU / RAM / Disco:</strong> Telemetria detalhada de consumo de hardware do servidor.</li>
+                <li><strong>Rede & Conectividade:</strong> Monitoramento de throughput de Download/Upload e testes de latência.</li>
+            </ul>
+        </div>
+
+        <h2>4. Instalação Automatizada e Cópia de Arquivos</h2>
+        <p>Para simplificar o processo de implantação da plataforma no servidor Debian Samba AD, o projeto conta com o script autosserviço <code>install.sh</code> (ou <code>installsmbc4.sh</code>).</p>
+
+        <h3>Passo 1: Execução do Script Instalador</h3>
+        <pre><code>chmod +x installsmbc4.sh
+sudo ./installsmbc4.sh</code></pre>
+
+        <h3>Passo 2: Cópia Obrigatória de Arquivos do Projeto</h3>
+        <p>Após a finalização da execução do script de instalação, é obrigatório realizar a cópia da pasta de arquivos estáticos, dos scripts Python e do módulo de Inteligência Artificial para o diretório de execução da aplicação:</p>
+
+        <div class="callout warning">
+            <strong>📁 Arquivos e Pastas a Serem Copiados:</strong>
+            <ul>
+                <li>Pasta: <code>public/</code> (Contém os arquivos estáticos, CSS, JS e componentes visuais do painel)</li>
+                <li>Arquivo: <code>server.py</code> (Script principal do servidor web e das rotas da API)</li>
+                <li>Arquivo: <code>samba_service.py</code> (Módulo de integração direta com os comandos do Samba 4)</li>
+                <li>Arquivo: <code>ai_detector.py</code> (Módulo de Machine Learning para análise preditiva de ameaças)</li>
+            </ul>
+        </div>
+
+        <p>Exemplo do comando de cópia para o diretório final da aplicação (<code>/opt/sambacore4/</code>):</p>
+        <pre><code>cp -r public/ /opt/sambacore4/
+cp server.py /opt/sambacore4/
+cp samba_service.py /opt/sambacore4/
+cp ai_detector.py /opt/sambacore4/</code></pre>
+
+        <div class="page-break"></div>
+
+        <!-- SEÇÃO NOVA: MÓDULO DE INTELIGÊNCIA ARTIFICIAL -->
+        <h2>5. Módulo de Inteligência Artificial e Análise Preditiva de Segurança</h2>
+        <p>O SambaCore4 possui um motor de IA Defensiva integrado responsável por analisar o comportamento do domínio em tempo real e prever riscos potenciais de segurança, como ataques de força bruta, sequestro de sessões ou desvio de comportamento operacional.</p>
+
+        <h3>Arquitetura e Bibliotecas de Machine Learning</h3>
+        <p>O motor é alimentado pelo arquivo <code>ai_detector.py</code> e requer as seguintes bibliotecas Python instaladas dentro do ambiente virtual (<code>venv</code>) da aplicação:</p>
+        <ul>
+            <li><code>scikit-learn</code>: Fornece algoritmos preditivos e modelos de detecção de anomalias.</li>
+            <li><code>pandas</code>: Responsável pela manipulação e estruturação temporal dos logs do sistema.</li>
+            <li><code>numpy</code>: Processamento de matrizes e vetores numéricos de risco.</li>
+        </ul>
+
+        <h3>Parâmetros e Variáveis Avaliadas pelo Modelo</h3>
+        <p>A cada execução da varredura (via botão <em>"Executar Varredura"</em> ou agendamento automático), o modelo processa as seguintes métricas do servidor:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 35%;">Métrica / Evento</th>
+                    <th style="width: 65%;">Descrição do Diagnóstico</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Falhas de Autenticação</strong></td>
+                    <td>Mapeia tentativas incorretas de login via NTLM/Kerberos para identificar padrões de <em>Brute Force</em> ou <em>Password Spraying</em>.</td>
+                </tr>
+                <tr>
+                    <td><strong>Anomalia de Horários</strong></td>
+                    <td>Compara acessos e solicitações de autenticação ocorridas fora do horário comercial com o histórico do domínio.</td>
+                </tr>
+                <tr>
+                    <td><strong>Volumetria de Requisições por IP</strong></td>
+                    <td>Detecta picos anormais de tráfego vindos de uma mesma estação de trabalho ou IP da rede local.</td>
+                </tr>
+                <tr>
+                    <td><strong>Alteração de Contas Privilegiadas</strong></td>
+                    <td>Avalia criações de usuários atípicos, resetes de senha repetidos e bloqueios repentinos de contas corporativas.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Interpretando a Pontuação de Risco (Risk Score)</h3>
+        <p>O modelo consolida as anomalias detectadas em uma pontuação normalizada de <strong>0 a 100</strong>:</p>
+        <ul>
+            <li><strong>0 a 30 (LOW / Verde):</strong> Ambiente estável e seguro. Nenhuma anomalia significativa foi detectada.</li>
+            <li><strong>31 a 70 (MEDIUM / Amarelo):</strong> Alerta moderado. Pequenos desvios detectados (ex: falhas de login pontuais de um usuário).</li>
+            <li><strong>71 a 100 (HIGH / Vermelho):</strong> Alerta crítico. Atividade altamente atípica detectada, indicando potencial ataque ou vetor de ameaça em andamento.</li>
+        </ul>
+
+        <h2>6. Administração Básica do Banco de Dados PostgreSQL</h2>
+        <p>O PostgreSQL é utilizado pela aplicação para armazenar com segurança os logs de auditoria e os acessos dos operadores do painel web.</p>
+
+        <h3>Acesso ao Prompt e Comandos Importantes</h3>
+        <pre><code># Acessar a base de dados da aplicação no PostgreSQL
+sudo -u postgres psql -d sambacore4_db</code></pre>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 35%;">Comando / Query</th>
+                    <th style="width: 65%;">Função / Descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>\dt</code></td>
+                    <td>Lista todas as tabelas criadas no banco da aplicação (operadores, logs, sessões).</td>
+                </tr>
+                <tr>
+                    <td><code>\d nome_tabela</code></td>
+                    <td>Exibe a estrutura detalhada e colunas de uma tabela específica.</td>
+                </tr>
+                <tr>
+                    <td><code>SELECT * FROM operadores;</code></td>
+                    <td>Consulta e exibe todos os operadores com acesso ao painel.</td>
+                </tr>
+                <tr>
+                    <td><code>\q</code></td>
+                    <td>Encerra a sessão e sai do prompt do PostgreSQL.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SEÇÃO CRÍTICA: ALTERAÇÃO DA SENHA DO BANCO -->
+        <h2>7. Procedimento de Segurança: Alteração da Senha do Banco PostgreSQL</h2>
+        <p>Por padrão, a instalação automatizada define as seguintes credenciais de banco de dados:</p>
+        <ul>
+            <li><strong>Usuário do Banco:</strong> <code>sambacore</code></li>
+            <li><strong>Banco de Dados:</strong> <code>sambacore4_db</code></li>
+            <li><strong>Senha Padrão:</strong> <code>dominus7even</code></li>
+        </ul>
+
+        <div class="callout danger">
+            <strong>⚠️ AVISO IMPORTANTE DE SEGURANÇA:</strong><br>
+            Em ambientes de produção, é fundamental alterar a senha padrão (<code>dominus7even</code>) para garantir a integridade dos dados e impedir acessos não autorizados.
+        </div>
+
+        <h3>Passo 1: Alterar a Senha Dentro do PostgreSQL</h3>
+        <p>Execute o comando abaixo no terminal do servidor Linux para modificar a senha do usuário <code>sambacore</code> diretamente no gerenciador do PostgreSQL (substitua <code>SuaNovaSenhaSegura123!</code> pela sua nova senha):</p>
+        <pre><code>sudo -u postgres psql -c "ALTER USER sambacore WITH PASSWORD 'SuaNovaSenhaSegura123!';"</code></pre>
+
+        <h3>Passo 2: Atualizar a Senha no Arquivo de Serviço Systemd (`sambacore.service`)</h3>
+        <p>Como a aplicação obtém as credenciais através de variáveis de ambiente gerenciadas pelo <code>systemd</code>, você deve atualizar o arquivo de serviço localizado em <code>/etc/systemd/system/sambacore.service</code>:</p>
+
+        <p>1. Abra o arquivo no editor de texto:</p>
+        <pre><code>sudo nano /etc/systemd/system/sambacore.service</code></pre>
+
+        <p>2. Localize a linha contendo a variável <code>Environment="DB_PASS=..."</code> e atualize para a nova senha:</p>
+        <pre><code># Altere a linha abaixo:
+Environment="DB_PASS=dominus7even"
+
+# Para a sua nova senha:
+Environment="DB_PASS=SuaNovaSenhaSegura123!"</code></pre>
+
+        <h3>Passo 3: Atualizar a Senha no Script Instalador (`install.sh` / `installsmbc4.sh`)</h3>
+        <p>Caso precise reexecutar a instalação ou realizar novos deploys no futuro, atualize a variável <code>DB_PASS</code> dentro do script de instalação:</p>
+        <pre><code># Edite o script de instalação
+nano installsmbc4.sh
+
+# Altere a linha correspondente:
+DB_PASS="SuaNovaSenhaSegura123!"</code></pre>
+
+        <h3>Passo 4: Recarregar as Configurações e Reiniciar o Serviço</h3>
+        <p>Por fim, recarregue as configurações do daemon <code>systemd</code> e reinicie o serviço da aplicação para aplicar as alterações:</p>
+        <pre><code>sudo systemctl daemon-reload
+sudo systemctl restart sambacore
+sudo systemctl status sambacore</code></pre>
+
+        <div class="page-break"></div>
+
+        <h2>8. Gerenciamento de Serviços e Processos</h2>
+
+        <h3>Gerenciamento Padrão via Service (`systemd`)</h3>
+        <pre><code>sudo systemctl stop sambacore    # Interrompe o funcionamento do painel
+sudo systemctl start sambacore   # Inicia o serviço da aplicação
+sudo systemctl status sambacore  # Exibe o estado atual do serviço</code></pre>
+
+        <h3>Encerramento Forçado do Processo (`killall python3`)</h3>
+        <p>Em cenários de exceção onde a aplicação venha a travar ou prender requisições pendentes, utilize o comando:</p>
+        <pre><code>sudo killall -9 python3</code></pre>
+
+        <div class="callout warning">
+            <strong>Para que serve encerrar o processo Python forçadamente?</strong><br>
+            1. <strong>Desalocação de Portas:</strong> Libera imediatamente a porta de rede utilizada pelo servidor web.<br>
+            2. <strong>Desbloqueio de Conexões:</strong> Destrava conexões que tenham ficado presas em deadlock com a base LDAP do Active Directory ou banco de dados.<br>
+            3. <strong>Reinicialização Limpa:</strong> Permite reiniciar o serviço sem resíduos de memória através do comando <code>systemctl start sambacore</code>.
+        </div>
+
+        <h2>9. Conexão Segura: HTTPS vs. Porta 5000 (HTTP)</h2>
+        <p>A utilização da porta <code>5000</code> em HTTP convencional transmite dados administrativos e credenciais corporativas em texto simples pela rede local, o que representa um risco de segurança. Por essa razão, a arquitetura do SambaCore4 <strong>desabilita o acesso HTTP na porta 5000</strong> e canaliza todas as requisições para a <strong>Porta 8443 com HTTPS criptografado via Proxy Reverso Nginx (SSL/TLS)</strong>.</p>
+
+    </div>
+
+</body>
+</html>
