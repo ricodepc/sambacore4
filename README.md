@@ -1,7 +1,7 @@
 # 🚀 SambaCore 4
 
 O **SambaCore 4** é uma solução completa de gerenciamento com painel web integrado, backend Python (Flask), banco de dados PostgreSQL e proxy reverso Nginx com suporte a SSL/HTTPS.
-[Dashboard SambaCore4](public/dashboard.png)
+<img src="public/dashboard.png" alt="Dashboard SambaCore4" width="100%">
 ---
 
 ## 🛠️ Requisitos do Sistema
